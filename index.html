@@ -27,23 +27,23 @@ font-weight:bold;
 
 <body>
 
-<h2>Multivariable-adjusted Hill cSaO2 Calculator</h2>
+<h2>Rhinox: white rhino arterial blood saturation calculator</h2>
 
-<p>Leave body temperature and BE blank to use default assumptions.</p>
+<p>Leave body temperature and base excess blank to use default assumptions</p>
 
-<label>Body mass (metric tonnes)</label><br>
+<label>Body mass (metric tonne)</label><br>
 <input id="mass" type="number" step="any"><br>
 
-<label>Measured pH @ 37°C</label><br>
+<label>Arterial blood pH @ 37°C</label><br>
 <input id="ph" type="number" step="any"><br>
 
-<label>PaO2 @ 37°C (mmHg)</label><br>
+<label>Arterial blood PO2 @ 37°C (mmHg)</label><br>
 <input id="pao2" type="number" step="any"><br>
 
-<label>Body temperature (°C) — default 37</label><br>
+<label>Body temperature (°C; if available) — default 37</label><br>
 <input id="temp" type="number" step="any"><br>
 
-<label>BE (mmol/L) — default 0</label><br>
+<label>Arterial blood base excess (mmol/L = mEq/L; if available) — default 0</label><br>
 <input id="be" type="number" step="any"><br>
 
 <br>
@@ -84,4 +84,5 @@ document.getElementById("result").innerHTML =
 </script>
 
 </body>
+
 </html>
