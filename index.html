@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SO2 Calculator</title>
+
+<style>
+body{
+font-family: Arial;
+max-width:700px;
+margin:40px auto;
+}
+
+input{
+width:120px;
+padding:6px;
+margin:5px;
+}
+
+.result{
+font-size:22px;
+margin-top:20px;
+font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h2>Multivariable-adjusted Hill cSaO2 Calculator</h2>
+
+<p>Leave body temperature and BE blank to use default assumptions.</p>
+
+<label>Body mass (metric tonnes)</label><br>
+<input id="mass" type="number" step="any"><br>
+
+<label>Measured pH @ 37°C</label><br>
+<input id="ph" type="number" step="any"><br>
+
+<label>PaO2 @ 37°C (mmHg)</label><br>
+<input id="pao2" type="number" step="any"><br>
+
+<label>Body temperature (°C) — default 37</label><br>
+<input id="temp" type="number" step="any"><br>
+
+<label>BE (mmol/L) — default 0</label><br>
+<input id="be" type="number" step="any"><br>
+
+<br>
+<button onclick="calculate()">Calculate</button>
+
+<div class="result" id="result"></div>
+
+<script>
+
+function calculate(){
+
+let mass = parseFloat(document.getElementById("mass").value);
+let ph = parseFloat(document.getElementById("ph").value);
+let pao2 = parseFloat(document.getElementById("pao2").value);
+
+let temp = parseFloat(document.getElementById("temp").value);
+let be = parseFloat(document.getElementById("be").value);
+
+/* defaults from spreadsheet */
+if(isNaN(temp)){ temp = 37; }
+if(isNaN(be)){ be = 0; }
+
+let log_term =
+Math.log10(39.2 * Math.pow((mass*1000*1000), -0.035))
++ (0.5*(7.4-ph) + 0.024*(temp-37) + 0.0013*(be));
+
+let p50 = Math.pow(10, log_term);
+
+let result =
+( Math.pow(pao2,3) /
+( Math.pow(p50,3) + Math.pow(pao2,3) ) ) * 100;
+
+document.getElementById("result").innerHTML =
+"cSaO₂ = " + result.toFixed(2) + " %";
+
+}
+
+</script>
+
+</body>
+</html>
